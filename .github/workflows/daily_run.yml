@@ -18,7 +18,7 @@ jobs:
         python-version: '3.10'
 
     - name: Install dependencies
-      run: pip install yfinance feedparser
+      run: pip install yfinance feedparser fpdf
 
     - name: Run script
       run: python finance_ai.py
