@@ -2,7 +2,8 @@ import yfinance as yf
 import feedparser
 import random
 from datetime import datetime
-from fpdf import FPDF
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 import smtplib
 from email.message import EmailMessage
 import os
@@ -69,18 +70,21 @@ blog_content += f"Gita Thought:\n{gita['shloka']}\nMeaning: {gita['meaning']}\n"
 # ----------------------------
 # 5. Convert to PDF
 # ----------------------------
-pdf = FPDF()
-pdf.add_page()
-pdf.set_font("Arial", size=11)
-
-# Clean unicode characters
-safe_text = blog_content.encode("latin-1", "replace")
-
-for line in safe_text.decode("latin-1").split("\n"):
-    pdf.cell(0, 8, txt=line, ln=True)
-
 filename = "Daily_Update.pdf"
-pdf.output(filename)
+
+c = canvas.Canvas(filename, pagesize=letter)
+width, height = letter
+
+y = height - 50
+
+for line in blog_content.split("\n"):
+    c.drawString(50, y, line)
+    y -= 15
+    if y < 50:
+        c.showPage()
+        y = height - 50
+
+c.save()
 
 # ----------------------------
 # 6. Send Email
