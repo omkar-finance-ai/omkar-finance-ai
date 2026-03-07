@@ -73,11 +73,11 @@ pdf = FPDF()
 pdf.add_page()
 pdf.set_font("Arial", size=11)
 
-# Clean text to avoid Unicode errors
-safe_text = blog_content.encode("latin-1", "ignore").decode("latin-1")
+# Clean unicode characters
+safe_text = blog_content.encode("latin-1", "replace")
 
-for line in safe_text.split("\n"):
-    pdf.multi_cell(0, 8, line)
+for line in safe_text.decode("latin-1").split("\n"):
+    pdf.cell(0, 8, txt=line, ln=True)
 
 filename = "Daily_Update.pdf"
 pdf.output(filename)
