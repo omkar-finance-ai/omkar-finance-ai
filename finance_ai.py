@@ -74,7 +74,8 @@ pdf.add_page()
 pdf.set_font("Arial", size=11)
 
 for line in blog_content.split("\n"):
-    pdf.multi_cell(0, 8, line)
+    clean_line = line.encode("latin-1", "replace").decode("latin-1")
+    pdf.multi_cell(0, 8, clean_line)
 
 filename = f"Daily_Update_{today_date}.pdf"
 pdf.output(filename)
