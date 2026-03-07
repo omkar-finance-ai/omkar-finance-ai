@@ -73,9 +73,8 @@ pdf = FPDF()
 pdf.add_page()
 pdf.set_font("Arial", size=11)
 
-# Clean text to avoid unicode errors
-safe_text = blog_content.replace("–", "-").replace("—", "-")
-safe_text = safe_text.encode("latin-1", "replace").decode("latin-1")
+# Clean text to avoid Unicode errors
+safe_text = blog_content.encode("latin-1", "ignore").decode("latin-1")
 
 for line in safe_text.split("\n"):
     pdf.multi_cell(0, 8, line)
