@@ -23,5 +23,5 @@ jobs:
     pip install --upgrade pip
     pip install yfinance feedparser reportlab
 
-- name: Run script
+    - name: Run script
   run: python finance_ai.py
