@@ -25,3 +25,5 @@ jobs:
 
       - name: Run script
         run: python finance_ai.py
+        env:
+      EMAIL_ADDRESS: ${{ sinkaromkar33@gmail.com }}
