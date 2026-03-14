@@ -102,8 +102,12 @@ with open(filename, "rb") as f:
     file_data = f.read()
     msg.add_attachment(file_data, maintype="application", subtype="pdf", filename=filename)
 
-with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-    smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-    smtp.send_message(msg)
+try:
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+        smtp.send_message(msg)
 
-print("Email sent successfully!")
+    print("Email sent successfully!")
+
+except Exception as e:
+    print("Email sending failed:", e)
