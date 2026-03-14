@@ -26,5 +26,5 @@ jobs:
       - name: Run script
         run: python finance_ai.py
         env:
-          EMAIL_ADDRESS: ${{ sinkaromkar33@gmail.com }}
-          EMAIL_PASSWORD: ${{ Omkaar@369963 }}
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
